@@ -13,10 +13,15 @@ module Metova
 
       config.lograge.enabled = true
       config.lograge.custom_options = lambda do |event|
+        params = event.payload[:params].reject do |k|
+          %w(controller action format).include? k
+        end
+
         {
           time: event.time,
           user: event.payload[:user],
           ip: event.payload[:ip],
+          params: "<PARAMS>#{params}</PARAMS>"
         }
       end
 

@@ -1,18 +1,20 @@
-module MetovaLogs
-  module ControllerPatch
+module Metova
+  module Logger
+    module ControllerPatch
 
-    def append_info_to_payload(payload)
-      super
-      payload[:ip] = request.remote_ip
-      if current_user
-        payload[:user] = [
-          (current_user.try(:email) || 'NOEMAIL'),
-          current_user.id
-        ].join('/')
+      def append_info_to_payload(payload)
+        super
+        payload[:ip] = request.remote_ip
+        if current_user
+          payload[:user] = [
+            (current_user.try(:email) || 'NOEMAIL'),
+            current_user.id
+          ].join('/')
+        end
       end
-    end
 
+    end
   end
 end
 
-ActionController::Base.send :include, MetovaLogs::ControllerPatch
+ActionController::Base.send :include, Metova::Logger::ControllerPatch

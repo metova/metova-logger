@@ -5,9 +5,11 @@ module Metova
   module Logger
     class Railtie < ::Rails::Railtie
 
-      config.log_tags = [
-        lambda { |request| request.uuid[0..15] }
-      ]
+      initializer 'metova.logger' do |app|
+        app.config.log_tags = [
+          lambda { |req| req.uuid[0..15] }
+        ]
+      end
 
       config.lograge.enabled = true
       config.lograge.custom_options = lambda do |event|

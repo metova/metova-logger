@@ -5,7 +5,7 @@ module Metova
       def append_info_to_payload(payload)
         super
         payload[:ip] = request.remote_ip
-        if current_user
+        if defined?(current_user) && current_user
           payload[:user] = [
             (current_user.try(:email) || 'NOEMAIL'),
             current_user.id

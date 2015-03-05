@@ -7,7 +7,9 @@ Including this gem will format Rails logs with Lograge. Logs will include user I
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'metova-logger'
+group :staging, :production do
+  gem 'metova-logger'
+end
 ```
 
 And then execute:

@@ -7,8 +7,8 @@ module Metova
         payload[:ip] = request.remote_ip
         if defined?(current_user) && current_user
           payload[:user] = [
-            (current_user.try(:email) || 'NOEMAIL'),
-            current_user.id
+            (current_user.try(:email) || 'NO_EMAIL'),
+            (current_user.try(:id) || 'NO_ID')
           ].join('/')
         end
       end

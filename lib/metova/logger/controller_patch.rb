@@ -1,7 +1,6 @@
 module Metova
   module Logger
     module ControllerPatch
-
       def append_info_to_payload(payload)
         super
         payload[:ip] = request.remote_ip
@@ -12,9 +11,8 @@ module Metova
           ].join('/')
         end
       end
-
     end
   end
 end
 
-ActionController::Base.send :include, Metova::Logger::ControllerPatch
+ActionController::Base.include Metova::Logger::ControllerPatch
